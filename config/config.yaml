@@ -1,7 +1,7 @@
 dataset_url: "https://universe.roboflow.com/ds/AGwYvP3noP?key=${STRAWBERRY_DISEASE_KEY}"
 output_dir : "data"
 
-base_dir: "/Users/rabindramanandhar/Documents/GarageClub/Projects/Strawberry_Health_AI"
+base_dir: "/home/aiot-garage/Strawberry_Health_AI"
 
 new_image_path: "images/Unhealthy/white light"
 

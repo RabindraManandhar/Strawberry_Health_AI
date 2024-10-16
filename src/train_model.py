@@ -2,7 +2,7 @@ from ultralytics import YOLO
 
 def train_model(data_file, batch_size, epochs, img_size):
     # Load the pre-trained YOLOv8n model
-    model = YOLO('yolov8m.pt')
+    model = YOLO('yolov8n.pt')
     print("Pre-trained YOLOv8n model loaded successfully.")
 
     # Fine-tune the model on the training set in the roboflow dataset.
@@ -30,8 +30,8 @@ def train_model(data_file, batch_size, epochs, img_size):
         fliplr=0.5,  # Probability of horizontal flip
         mosaic=1.0,  # Probability of applying mosaic augmentation (mixes 4 images into one)
         mixup=0.2,  # Probability of applying mixup (blends two images)
-        device="mps" # To enable training on Apple M1 and M2 chips, you should specify 'mps'
+        device=(0,1) # multi gpu
     )
 
-    print(f"Model fine-tuned for {epochs} epochs with initial learning rate {lr0}.")
+    print(f"Model fine-tuned for {epochs} epochs.")
 

@@ -8,8 +8,8 @@ sys.path.append(os.path.join(script_dir, '..', 'src'))
 from src.utils import load_config_with_env
 from src.download_data import download_and_extract_dataset
 from src.train_model import train_model
-from src.validate_model import validate_model
-from src.predict import run_inference
+#from src.validate_model import validate_model
+#from src.predict import run_inference
 
 if __name__ == '__main__':
     # load configuration
@@ -27,12 +27,13 @@ if __name__ == '__main__':
     epochs = config['epochs']
     batch_size = config['batch_size']
     img_size = config['img_size']
-    #train_model(data_file, batch_size,epochs, img_size)
+    train_model(data_file, batch_size,epochs, img_size)
 
     # Validate the trained model
-    model_path = "runs/detect/train/weights/best.pt"
+    #model_path = "runs/detect/train/weights/best.pt"
+    #model_path = "runs/detect/train3/weights/best.pt"
     #validate_model(model_path, data_file)
 
     # Predict the trained model
-    new_image_path = config['new_image_path']
+    #new_image_path = config['new_image_path']
     #run_inference(model_path, new_image_path)
