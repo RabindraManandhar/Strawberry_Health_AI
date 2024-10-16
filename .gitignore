@@ -6,8 +6,6 @@ __pycache__/
 venv/
 
 # Ignore data folders (raw and processed data)
-data/
-runs/
 
 # Ignore files
 *.pages
