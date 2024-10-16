@@ -1,0 +1,28 @@
+# Ignore Python bytecode and compiled files
+__pycache__/
+*.py[cod]
+
+# Ignore virtual environment
+venv/
+
+# Ignore data folders (raw and processed data)
+data/
+runs/
+
+# Ignore files
+*.pages
+
+# Ignore logs (TensorBoard logs or other logs)
+logs/
+*.log
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore system-specific or editor files
+.DS_Store
+.idea/
+.vscode/
+
+# Ignore environment variables and secrets (if applicable)
+.env

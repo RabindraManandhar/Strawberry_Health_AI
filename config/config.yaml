@@ -1,0 +1,14 @@
+dataset_url: "https://universe.roboflow.com/ds/AGwYvP3noP?key=${STRAWBERRY_DISEASE_KEY}"
+output_dir : "data"
+
+base_dir: "/Users/rabindramanandhar/Documents/GarageClub/Projects/Strawberry_Health_AI"
+
+new_image_path: "images/Unhealthy/white light"
+
+# Training Hyperparameters
+epochs: 20                # Number of training epochs
+batch_size: 16            # Batch size
+img_size: 640             # Input image size
+
+
+
