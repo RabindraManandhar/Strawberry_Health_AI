@@ -6,7 +6,7 @@ base_dir: "/home/aiot-garage/Strawberry_Health_AI"
 new_image_path: "images/Unhealthy/white light"
 
 # Training Hyperparameters
-epochs: 20                # Number of training epochs
+epochs: 30                # Number of training epochs for train.py => 5, train2.py => 20, train3.py => 30)
 batch_size: 16            # Batch size
 img_size: 640             # Input image size
 
