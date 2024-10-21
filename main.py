@@ -27,7 +27,7 @@ if __name__ == '__main__':
     epochs = config['epochs']
     batch_size = config['batch_size']
     img_size = config['img_size']
-    #train_model(data_file, batch_size, epochs, img_size)
+    train_model(data_file, batch_size, epochs, img_size)
 
     '''
     # Validate the trained model
@@ -39,4 +39,4 @@ if __name__ == '__main__':
     model_path = "runs/detect/train4/weights/last.pt"
     new_image_path = config['new_image_path']
     #classification = predict_and_classify(model_path, new_image_path)
-    predict_and_classify(model_path, new_image_path)
+    #predict_and_classify(model_path, new_image_path)
