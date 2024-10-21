@@ -6,8 +6,6 @@
 ### 2. Model-2 Fine-tuned for 20 epochs in original dataset => runs/detect/train2
 20 epochs completed in 2.465 hours.
 
-Model summary (fused): 186 layers, 2,685,733 parameters, 0 gradients, 6.8 GFLOPs
-
 | Class                  | Images | Instances | P     | R     | mAP50 | mAP50-95 |
 |------------------------|--------|-----------|-------|-------|-------|----------|
 | all                    | 308    | 754       | 0.709 | 0.722 | 0.781 | 0.565    |
@@ -18,14 +16,14 @@ Model summary (fused): 186 layers, 2,685,733 parameters, 0 gradients, 6.8 GFLOPs
 | Leaf Spot              | 71     | 257       | 0.737 | 0.844 | 0.862 | 0.736    |
 | Powdery Mildew Fruit    | 12     | 18        | 0.513 | 0.611 | 0.549 | 0.370    |
 | Powdery Mildew Leaf     | 63     | 255       | 0.511 | 0.902 | 0.847 | 0.722    |
+
+Model summary (fused): 186 layers, 2,685,733 parameters, 0 gradients, 6.8 GFLOPs
                 
 Speed: 0.4ms preprocess, 27.1ms inference, 0.0ms loss, 0.6ms postprocess per image
 
-### 3. Model-3 Fine-tuned for 20 epochs in dataset with grascale images => runs/detect/train3
+### 3. Model-3 Fine-tuned for 20 epochs in dataset with grayscale images => runs/detect/train3
 
 20 epochs completed in 0.147 hours.
-
-Model summary (fused): 186 layers, 2,685,733 parameters, 0 gradients, 6.8 GFLOPs
 
 | Class                  | Images | Instances | P     | R     | mAP50 | mAP50-95 |
 |------------------------|--------|-----------|-------|-------|-------|----------|
@@ -37,6 +35,8 @@ Model summary (fused): 186 layers, 2,685,733 parameters, 0 gradients, 6.8 GFLOPs
 | Leaf Spot              | 71     | 257       | 0.65 | 0.798 | 0.798 | 0.664    |
 | Powdery Mildew Fruit    | 12     | 18        | 0.227 | 0.333 | 0.295 | 0.18    |
 | Powdery Mildew Leaf     | 63     | 255       | 0.492 | 0.859 | 0.783 | 0.652    |
+
+Model summary (fused): 186 layers, 2,685,733 parameters, 0 gradients, 6.8 GFLOPs
 
 Speed: 0.2ms preprocess, 1.2ms inference, 0.0ms loss, 0.9ms postprocess per image
 

@@ -5,8 +5,10 @@ base_dir: "/home/aiot-garage/Strawberry_Health_AI"
 
 new_image_path: "images/Unhealthy/white light"
 
+class_names: ['Angular Leafspot', 'Anthracnose Fruit Rot', 'Blossom Blight', 'Gray Mold', 'Leaf Spot', 'Powdery Mildew Fruit', 'Powdery Mildew Leaf']
+
 # Training Hyperparameters
-epochs: 50                # Number of training epochs
+epochs: 100                # Number of training epochs
 batch_size: 16            # Batch size
 img_size: 640             # Input image size
 

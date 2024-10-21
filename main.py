@@ -20,7 +20,6 @@ if __name__ == '__main__':
     dataset_url = config['dataset_url']
     output_dir = config['output_dir']
     #download_and_extract_dataset(dataset_url, output_dir)
-    download_and_extract_dataset(dataset_url, output_dir)
 
     # Fine-tuning the preloaded model on roboflow dataset with Transfer learning
     # Extract parameters from the config
@@ -28,15 +27,16 @@ if __name__ == '__main__':
     epochs = config['epochs']
     batch_size = config['batch_size']
     img_size = config['img_size']
-    train_model(data_file, batch_size, epochs, img_size)
+    #train_model(data_file, batch_size, epochs, img_size)
 
+    '''
     # Validate the trained model
     #model_path = "runs/detect/train/weights/best.pt"
-    #model_path = "runs/detect/train2/weights/best.pt"
-    #validate_model(model_path, data_file)
+    #validate_model(model_path, data_file) 
+    '''
 
-    # Predict the trained model
-    #model_path = "runs/detect/train/weights/best.pt"
-    #model_path = "runs/detect/train2/weights/best.pt"
-    #new_image_path = config['new_image_path']
+    # Predict and classify the trained model
+    model_path = "runs/detect/train4/weights/last.pt"
+    new_image_path = config['new_image_path']
     #classification = predict_and_classify(model_path, new_image_path)
+    predict_and_classify(model_path, new_image_path)
