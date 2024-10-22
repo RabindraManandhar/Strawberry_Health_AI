@@ -8,8 +8,8 @@ new_image_path: "images"
 class_names: ['Angular Leafspot', 'Anthracnose Fruit Rot', 'Blossom Blight', 'Gray Mold', 'Leaf Spot', 'Powdery Mildew Fruit', 'Powdery Mildew Leaf']
 
 # Training Hyperparameters
-epochs: 100                # Number of training epochs
-batch_size: 16            # Batch size
+epochs: 75                # Number of training epochs
+batch_size: 32            # Batch size
 img_size: 640             # Input image size
 
 

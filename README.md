@@ -5,6 +5,7 @@
 
 ### 2. Model-2 Fine-tuned for 20 epochs in original dataset => runs/detect/train2
 20 epochs completed in 2.465 hours.
+Model summary (fused): 186 layers, 2,685,733 parameters, 0 gradients, 6.8 GFLOPs
 
 | Class                  | Images | Instances | P     | R     | mAP50 | mAP50-95 |
 |------------------------|--------|-----------|-------|-------|-------|----------|
@@ -17,13 +18,12 @@
 | Powdery Mildew Fruit    | 12     | 18        | 0.513 | 0.611 | 0.549 | 0.370    |
 | Powdery Mildew Leaf     | 63     | 255       | 0.511 | 0.902 | 0.847 | 0.722    |
 
-Model summary (fused): 186 layers, 2,685,733 parameters, 0 gradients, 6.8 GFLOPs
-                
 Speed: 0.4ms preprocess, 27.1ms inference, 0.0ms loss, 0.6ms postprocess per image
 
 ### 3. Model-3 Fine-tuned for 20 epochs in dataset with grayscale images => runs/detect/train3
 
 20 epochs completed in 0.147 hours.
+Model summary (fused): 186 layers, 2,685,733 parameters, 0 gradients, 6.8 GFLOPs
 
 | Class                  | Images | Instances | P     | R     | mAP50 | mAP50-95 |
 |------------------------|--------|-----------|-------|-------|-------|----------|
@@ -36,13 +36,12 @@ Speed: 0.4ms preprocess, 27.1ms inference, 0.0ms loss, 0.6ms postprocess per ima
 | Powdery Mildew Fruit    | 12     | 18        | 0.227 | 0.333 | 0.295 | 0.18    |
 | Powdery Mildew Leaf     | 63     | 255       | 0.492 | 0.859 | 0.783 | 0.652    |
 
-Model summary (fused): 186 layers, 2,685,733 parameters, 0 gradients, 6.8 GFLOPs
-
 Speed: 0.2ms preprocess, 1.2ms inference, 0.0ms loss, 0.9ms postprocess per image
 
 ### 4. Model-4 Fine-tuned for 50 epochs in original dataset => runs/detect/train4
 
 50 epochs completed in 0.365 hours.
+Model summary (fused): 186 layers, 2,685,733 parameters, 0 gradients, 6.8 GFLOPs
 
 | Class                  | Images | Instances | P     | R     | mAP50 | mAP50-95 |
 |------------------------|--------|-----------|-------|-------|-------|----------|
@@ -55,6 +54,19 @@ Speed: 0.2ms preprocess, 1.2ms inference, 0.0ms loss, 0.9ms postprocess per imag
 | Powdery Mildew Fruit    | 12     | 18        | 0.716 |      0.84  |     0.783 |     0.472    |
 | Powdery Mildew Leaf     | 63     | 255       | 0.598 |     0.898  |     0.852 |     0.737    |
 
-Model summary (fused): 186 layers, 2,685,733 parameters, 0 gradients, 6.8 GFLOPs
-
 Speed: 0.2ms preprocess, 1.2ms inference, 0.0ms loss, 0.9ms postprocess per image
+
+# 5. Model-5 Fine-tuned for 75 epochs => runs/detect/train7
+Model fine-tuned for 75 epochs.
+Model summary (fused): 186 layers, 2,685,733 parameters, 0 gradients, 6.8 GFLOPs
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 5/5 [00:02<00:00,  1.98it/s]
+                   all        308        754      0.852      0.751      0.882      0.669
+      Angular Leafspot         43         52      0.935      0.828      0.912      0.632
+ Anthracnose Fruit Rot         13         20      0.791        0.6      0.798      0.548
+        Blossom Blight         29         44      0.875          1      0.993      0.846
+             Gray Mold         77        108      0.947      0.657       0.86      0.546
+             Leaf Spot         71        257      0.906      0.826      0.931      0.816
+  Powdery Mildew Fruit         12         18      0.715      0.557      0.787      0.517
+   Powdery Mildew Leaf         63        255      0.794      0.792       0.89      0.778
+
+Speed: 0.2ms preprocess, 1.1ms inference, 0.0ms loss, 3.6ms postprocess per image

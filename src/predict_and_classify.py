@@ -24,7 +24,7 @@ def predict_and_classify(model_path, new_image_path):
             print(f"Running inference on {img_file}...")
 
             # Run inference on the image
-            results = model.predict(source=new_img_path, save=True, save_txt=True)
+            results = model.predict(source=new_img_path, conf=0.5, save=True, save_txt=True)
             print(f"Finished inference on {new_img_path}")
 
             # Check if any class (disease) is detected
