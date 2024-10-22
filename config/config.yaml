@@ -3,7 +3,7 @@ output_dir : "data"
 
 base_dir: "/home/aiot-garage/Strawberry_Health_AI"
 
-new_image_path: "images/Unhealthy/white light"
+new_image_path: "images"
 
 class_names: ['Angular Leafspot', 'Anthracnose Fruit Rot', 'Blossom Blight', 'Gray Mold', 'Leaf Spot', 'Powdery Mildew Fruit', 'Powdery Mildew Leaf']
 
