@@ -1,10 +1,12 @@
+# Roboflow dataset
 dataset_url: "https://universe.roboflow.com/ds/AGwYvP3noP?key=${STRAWBERRY_DISEASE_KEY}"
 output_dir : "data"
 
+# Local path
 base_dir: "/home/aiot-garage/Strawberry_Health_AI"
-
 new_image_path: "images"
 
+# Class names
 class_names: ['Angular Leafspot', 'Anthracnose Fruit Rot', 'Blossom Blight', 'Gray Mold', 'Leaf Spot', 'Powdery Mildew Fruit', 'Powdery Mildew Leaf']
 
 # Training Hyperparameters
@@ -12,5 +14,7 @@ epochs: 75                # Number of training epochs
 batch_size: 32            # Batch size
 img_size: 640             # Input image size
 
-
+# Raspberry Pi server IP and port
+server_url: "http://192.168.50.67:8000"
+download_dir: "downloaded_images"
 

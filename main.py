@@ -8,6 +8,7 @@ sys.path.append(os.path.join(script_dir, '..', 'src'))
 from src.utils import load_config_with_env
 from src.download_data import download_and_extract_dataset
 from src.train_model import train_model
+from src.download_images import list_images, download_image, download_all_images
 from src.predict_and_classify import predict_and_classify
 from src.camera_tracking_and_classification import capture_and_track
 
@@ -27,7 +28,14 @@ if __name__ == '__main__':
     epochs = config['epochs']
     batch_size = config['batch_size']
     img_size = config['img_size']
-    train_model(data_file, batch_size, epochs, img_size)
+    #train_model(data_file, batch_size, epochs, img_size)
+
+    # Downloading images from server
+    server_url = config['server_url']
+    download_dir = config['download_dir']
+    #list_images(server_url)
+    #download_image("abc.jpg", server_url, download_dir)
+    download_all_images(server_url, download_dir)
 
     # Predict and classify the trained model
     #model_path = "runs/detect/train5/weights/last.pt"

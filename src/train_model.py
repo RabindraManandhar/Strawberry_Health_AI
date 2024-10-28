@@ -154,7 +154,7 @@ def train_model(data_file, batch_size, epochs, img_size):
 '''
 
 
-# Model-6 with 100 epochs in original images => runs/detect/train6
+# Model-6 with 75 epochs in original images => runs/detect/train7
 
 from ultralytics import YOLO
 
