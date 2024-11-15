@@ -10,9 +10,12 @@ new_image_path: "images"
 class_names: ['Angular Leafspot', 'Anthracnose Fruit Rot', 'Blossom Blight', 'Gray Mold', 'Leaf Spot', 'Powdery Mildew Fruit', 'Powdery Mildew Leaf']
 
 # Training Hyperparameters
-epochs: 75                # Number of training epochs
+epochs: 50                # Number of training epochs
 batch_size: 32            # Batch size
 img_size: 640             # Input image size
+
+# Image Frame
+save_frames_dir: "save_frames_dir"
 
 # Raspberry Pi server IP and port
 server_url: "http://192.168.50.67:8000"

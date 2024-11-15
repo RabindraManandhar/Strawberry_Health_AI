@@ -1,0 +1,8 @@
+Image                Classification       Detected Classes
+----------------------------------------------------------------------
+Frame_1.jpg          Not Healthy          Gray Mold
+Frame_2.jpg          Not Healthy          Gray Mold
+Frame_3.jpg          Not Healthy          Gray Mold
+Frame_4.jpg          Not Healthy          Gray Mold
+Frame_5.jpg          Not Healthy          Gray Mold
+Frame_6.jpg          Not Healthy          Gray Mold

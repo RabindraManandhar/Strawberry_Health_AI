@@ -26,7 +26,7 @@ async def upload_image(file: UploadFile = File(...)):
         with open(file_path, "wb") as buffer:
             buffer.write(await file.read())
 
-        return {f"filename: {filename}, status: Image received successfullyl!"}
+        return {"filename": {filename}, "status": "Image received successfully!"}
     except Exception as e:
         return {"error": str(e)}
 

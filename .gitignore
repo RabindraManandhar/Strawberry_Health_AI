@@ -6,10 +6,14 @@ __pycache__/
 venv/
 
 # Ignore data folders (raw and processed data)
+downloaded_images/
+images/
+save_frames_dir/
 
 
 # Ignore files
 *.pages
+requirements.txt
 
 # Ignore logs (TensorBoard logs or other logs)
 logs/

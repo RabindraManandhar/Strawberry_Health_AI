@@ -8,3 +8,5 @@ numpy==1.26.4
 PyYAML==6.0.2
 requests==2.32.3
 opencv-python==4.10.0.84
+fastapi==0.115.4
+uvicorn==0.32.0

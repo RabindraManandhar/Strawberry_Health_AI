@@ -16,6 +16,8 @@ if __name__ == '__main__':
     # load configuration
     config = load_config_with_env()
 
+    model_path = "runs/detect/train5/weights/last.pt"
+
     # Download dataset if necessary
     # Extract parameters from the config
     dataset_url = config['dataset_url']
@@ -35,13 +37,13 @@ if __name__ == '__main__':
     download_dir = config['download_dir']
     #list_images(server_url)
     #download_image("abc.jpg", server_url, download_dir)
-    download_all_images(server_url, download_dir)
+    #download_all_images(server_url, download_dir)
 
     # Predict and classify the trained model
-    #model_path = "runs/detect/train5/weights/last.pt"
     #new_image_path = config['new_image_path']
     #predict_and_classify(model_path, new_image_path)
 
     # Camera tracking and classification
-    #camera_index = 0
-    #capture_and_track(model_path, camera_index)
+    camera_index = 0
+    save_frames_dir = config['save_frames_dir']
+    capture_and_track(model_path, camera_index, save_frames_dir)
