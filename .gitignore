@@ -13,7 +13,7 @@ save_frames_dir/
 
 # Ignore files
 *.pages
-requirements.txt
+classification_results.txt
 
 # Ignore logs (TensorBoard logs or other logs)
 logs/
