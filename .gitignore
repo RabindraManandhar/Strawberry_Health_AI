@@ -8,8 +8,9 @@ venv/
 # Ignore data folders (raw and processed data)
 downloaded_images/
 images/
+transformed_images_dir/
 save_frames_dir/
-
+runs/
 
 # Ignore files
 *.pages
@@ -34,3 +35,6 @@ logs/
 
 # Ignore environment variables and secrets (if applicable)
 .env
+
+# Python files
+segmentation.py
