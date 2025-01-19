@@ -3,7 +3,9 @@ from ultralytics import YOLO
 from src.utils import *
 
 
-def image_transform_and_classify(model_path, input_images_dir, transformed_images_dir):
+def server_image_transform_and_classify(
+    model_path, input_images_dir, transformed_images_dir
+):
 
     # Load the configuration from config.yaml
     config = load_config_with_env()

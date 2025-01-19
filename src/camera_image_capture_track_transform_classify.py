@@ -3,7 +3,9 @@ from ultralytics import YOLO
 from src.utils import *
 
 
-def image_capture_track_transform_classify(model_path, camera_index, saved_frames_dir):
+def camera_image_capture_transform_classify(
+    model_path, camera_index, transormed_frames_dir
+):
 
     # Load the configuration from config.yaml
     config = load_config_with_env()
@@ -17,8 +19,8 @@ def image_capture_track_transform_classify(model_path, camera_index, saved_frame
     results_list = []
 
     # Ensure the directory to save frame exists and is empty
-    os.makedirs(saved_frames_dir, exist_ok=True)
-    clear_folder(saved_frames_dir)
+    os.makedirs(transormed_frames_dir, exist_ok=True)
+    clear_folder(transormed_frames_dir)
 
     # Open a connection to the camera
     cap = cv2.VideoCapture(camera_index)
@@ -60,7 +62,7 @@ def image_capture_track_transform_classify(model_path, camera_index, saved_frame
 
         # Save the current frame as an image file
         frame_filename = f"Frame_{frame_count + 1}.jpg"
-        frame_filepath = os.path.join(saved_frames_dir, frame_filename)
+        frame_filepath = os.path.join(transormed_frames_dir, frame_filename)
         cv2.imwrite(frame_filepath, annotated_frame)  # Save the frame as an image
         print(f"Saved frame: {frame_filepath}")
 

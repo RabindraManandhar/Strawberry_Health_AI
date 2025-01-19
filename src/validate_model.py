@@ -4,9 +4,10 @@ import json
 import pandas as pd
 import glob
 
+
 def validate_model(model_path, data_file):
     # Load the trained model (after fine-tuning)
-    model  = YOLO(model_path)
+    model = YOLO(model_path)
 
     # Validate the model on the validation set
     metrics = model.val(data=data_file, save_json=True, device="mps")
@@ -17,7 +18,7 @@ def validate_model(model_path, data_file):
     print(metrics.box.maps)  # a list contains map50-95 of each category
 
     # Find the most recent validation directory in 'runs/detect/val'
-    latest_val_dir = get_latest_run_dir('runs/detect')
+    latest_val_dir = get_latest_run_dir("runs/detect")
 
     if latest_val_dir:
         # Construct the path to the predictions.json file
@@ -35,10 +36,11 @@ def validate_model(model_path, data_file):
 
     return metrics
 
+
 def get_latest_run_dir(base_dir):
 
     # List all subdirectories in base_dir
-    subdirs = glob.glob(os.path.join(base_dir, '*/'))
+    subdirs = glob.glob(os.path.join(base_dir, "*/"))
     if subdirs:
         # Sort subdirectories by modification time (latest first)
         latest_subdir = max(subdirs, key=os.path.getmtime)
@@ -46,10 +48,11 @@ def get_latest_run_dir(base_dir):
     else:
         return None
 
+
 def json_to_csv_pandas(json_file_path, csv_file_path):
 
     # Load the JSON data
-    with open(json_file_path, 'r') as f:
+    with open(json_file_path, "r") as f:
         data = json.load(f)
 
     # Create an empty list to store the data
@@ -72,7 +75,10 @@ def json_to_csv_pandas(json_file_path, csv_file_path):
         rows.append([image_id, class_id, confidence, xmin, ymin, xmax, ymax])
 
     # Create a DataFrame from the list
-    df = pd.DataFrame(rows, columns=["image_id", "class", "confidence", "xmin", "ymin", "xmax", "ymax"])
+    df = pd.DataFrame(
+        rows,
+        columns=["image_id", "class", "confidence", "xmin", "ymin", "xmax", "ymax"],
+    )
 
     # Save the DataFrame to a CSV file
     df.to_csv(csv_file_path, index=False)

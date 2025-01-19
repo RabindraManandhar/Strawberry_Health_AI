@@ -6,10 +6,11 @@ __pycache__/
 venv/
 
 # Ignore data folders (raw and processed data)
+data/
+uploaded_images/
 downloaded_images/
-images/
-transformed_images_dir/
-save_frames_dir/
+transformed_frames/
+transformed_images/
 runs/
 
 # Ignore files
@@ -38,3 +39,6 @@ logs/
 
 # Python files
 segmentation.py
+
+# YOLO weights
+yolov8n.pt

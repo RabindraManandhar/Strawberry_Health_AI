@@ -1,5 +1,4 @@
 # Downloading and extracting dataset with original images
-
 import os
 import zipfile
 import requests

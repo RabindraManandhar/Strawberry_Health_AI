@@ -1,10 +1,10 @@
 from ultralytics import YOLO
 
 
-def train_model(data_file, batch_size, epochs, img_size):
+def train_model(data_file, batch_size, epochs, img_size, device):
     # Load the pre-trained YOLOv8n model
-    model = YOLO("yolov8n-seg.pt")
-    print("Pre-trained YOLOv11n model loaded successfully.")
+    model = YOLO("yolov8n.pt")
+    print("Pre-trained YOLOv8n model loaded successfully.")
 
     # Fine-tune the model on the training set in the roboflow dataset.
     model.train(
@@ -13,8 +13,8 @@ def train_model(data_file, batch_size, epochs, img_size):
         batch=batch_size,
         epochs=epochs,
         imgsz=img_size,
+        device=device,
         patience=10,  # number of epochs to wait without improvement in validation metrics before early stopping
-        device=0,  # single gpu
         optimizer="AdamW",  # AdamW due to its ability to handle complex models like object detection and image classification.
         lr0=0.001,  # Initial learning rate (i.e. SGD=1E-2, Adam=1E-3) . Adjusting this value is crucial for the optimization process, influencing how rapidly model weights are updated.
         momentum=0.937,  # beta1 for Adam optimizers

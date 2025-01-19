@@ -1,72 +1,181 @@
-# Strawberry_Health_AI
+̌# Strawberry Plant Health AI
 
-### 1. Model-1 Default training for 5 epochs => train
+This project focuses on leveraging computer vision and YOLOv8 to detect and classify the health of strawberry plants. The workflow includes downloading open dataset, fine-tuning models, real-time classification of images using a camera as well as classification of images on a server.
+
+## Table of Contents
+1. [Features](#features)
+2. [Project Structure](#project-structure)
+3. [Installation](#installation)
+4. [Requirements](#requirements)
+5. [Setup](#setup)
+6. [Usage](#usage)
+   - [Run Program](#run-program)
+   - [Download Dataset](#download-dataset)
+   - [Train Model](#train-model)
+   - [Validate Model](#validate-model)
+   - [Capture Transform and Classify in Real-Time](#capture-transform-and-classify-in-real-time)
+   - [Download Images from Server](#download-images-from-server)
+   - [Transform and Classify Server Images](#transform-and-classify-server-images)
+   - [Server Operations](#server-operations)
+7. [Configuration](#configuration)
+8. [API Endpoints](#api-endpoints)
+9. [Acknowledgements](#acknowledgements)
+
+## Features
+- **Dataset Management**: Download datasets from URLs or a server.
+- **Training and Validation**: Fine-tune YOLOv8 on custom datasets.
+- **Image Transformation**: Apply transformations to improve detection.
+- **Real-Time Classification**: Use a camera for real-time object detection and classification.
+- **Server Support**: Upload, list, download, and manage images from a server.
+
+## Project Structure
+```
+STRAWBERRY_HEALTH_AI/
+├── config/                                                 # Project configuration directory
+│   ├── config.yaml
+├── data/                                                   # Dataset automatically downloaded -> python main.py
+│   ├── train/
+│   ├── test/
+│   ├── valid/
+│   ├── data.yaml
+│   ├── README.dataset.txt
+│   ├── README.roboflow.txt
+├── src/                                                    # Source code for the package
+│   ├── camera_image_capture_track_transform_classify.py
+│   ├── download_datasets.py
+│   ├── download_images_from_server.py            
+│   ├── server_image_transform_classify.py              
+│   ├── train_model.py
+│   ├── validate_model.py                
+├── venv/                      
+│   ├──
+├── .gitignore                                              # Git ignored files
+├── main.py                                                 # Entry point for the project
+├── README.md                                               # Detailed project description
+├── requirements.txt                                        # Required Python dependencies
+├── server.py                                               # Server setup
+```
+
+## Installation
+Clone the repository:
+```bash
+git clone https://github.com/RabindraManandhar/Strawberry_Health_AI
+cd Strawberry_Health_AI
+```
+
+## Requirements
+The project requires the following dependencies:
+
+- ultralytics>=8.0.0
+- torch>=2.4.1
+- torchaudio>=2.4.1
+- torchvision>=0.19.1
+- python-dotenv>=1.0.1
+- pandas>=2.2.3
+- numpy>=1.26.4
+- PyYAML>=6.0.2
+- requests>=2.32.3
+- opencv-python>=4.10.0.84
+- fastapi>=0.115.4
+- uvicorn>=0.32.0
+- scikit-learn>=1.5.2
+
+## Setup
+#### 1. Clone the Repository:
+```bash
+https://github.com/RabindraManandhar/Strawberry_Health_AI
+cd Strawberry_Health_AI
+```
+
+#### 2. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+#### 3. Set Up Environment Variables<br>
+Create a .env file in the root directory with the following:
+```bash
+STRAWBERRY_DISEASE_KEY=<YOUR_API_KEY>
+```
+
+#### 4. Configure Paths:<br>
+Update config/config.yaml in root directory with your directories, URLs, and model parameters.
+
+## Usage
+#### 1. Run Program:
+To run the program
+```bash
+python main.py
+```
+
+#### 2. Download Dataset:
+To download and extract the dataset:
+```bash
+python download_datasets.py
+```
+
+#### 3. Train Model:
+Fine-tune the YOLOv8 model on the downloaded dataset
+```bash
+python train_model.py
+```
+
+#### 4. Validate Model:
+Validate the trained model and save metrics:
+```bash
+python validate_model.py
+```
+
+#### 5. Capture Transform and Classify in Real-Time:
+Run the camera-based real-time detection, transformation and classification:
+```bash
+python camera_image_capture_track_transform_classify.py
+```
+
+#### 6. Download Images From Server:
+To download images from server:
+```bash
+python download_images_from_server.py
+```
+
+#### 7. Transform and Classify Server Images:
+Run the server-based images transformation and classification:
+```bash
+python server_iamge_transform_classify.py
+```
+
+#### 8. Server Operations
+Start the server:
+```bash
+uvicorn server:app --reload
+```
+
+## Configuration
+The configuration file config/config.yaml includes paths, parameters, and hyperparametrs.
+
+## API Endpoints
+#### 1. Upload Image
+Upload a new image to the server:
+- **Method**: POST
+- **Endpoint**: /upload_image
+
+#### 2. List Images
+List all available images on the server:
+- **Method**: GET
+- **Endpoint**: /list_images
+
+#### 3. Download Image
+Download a specific image from the server:
+- **Method**: GET
+- **Endpoint**: /get_image/{filename}
+
+#### 4. Download All Images
+Download all images as a ZIP file
+- **Method**: GET
+- **Endpoint**: /get_all_images
 
 
-### 2. Model-2 Fine-tuned for 20 epochs in original dataset => runs/detect/train2
-20 epochs completed in 2.465 hours.
-Model summary (fused): 186 layers, 2,685,733 parameters, 0 gradients, 6.8 GFLOPs
-
-| Class                  | Images | Instances | P     | R     | mAP50 | mAP50-95 |
-|------------------------|--------|-----------|-------|-------|-------|----------|
-| all                    | 308    | 754       | 0.709 | 0.722 | 0.781 | 0.565    |
-| Angular Leafspot        | 43     | 52        | 0.885 | 0.731 | 0.848 | 0.539    |
-| Anthracnose Fruit Rot   | 13     | 20        | 0.789 | 0.300 | 0.640 | 0.353    |
-| Blossom Blight          | 29     | 44        | 0.751 | 1.000 | 0.969 | 0.774    |
-| Gray Mold              | 77     | 108       | 0.774 | 0.667 | 0.752 | 0.462    |
-| Leaf Spot              | 71     | 257       | 0.737 | 0.844 | 0.862 | 0.736    |
-| Powdery Mildew Fruit    | 12     | 18        | 0.513 | 0.611 | 0.549 | 0.370    |
-| Powdery Mildew Leaf     | 63     | 255       | 0.511 | 0.902 | 0.847 | 0.722    |
-
-Speed: 0.4ms preprocess, 27.1ms inference, 0.0ms loss, 0.6ms postprocess per image
-
-### 3. Model-3 Fine-tuned for 20 epochs in dataset with grayscale images => runs/detect/train3
-
-20 epochs completed in 0.147 hours.
-Model summary (fused): 186 layers, 2,685,733 parameters, 0 gradients, 6.8 GFLOPs
-
-| Class                  | Images | Instances | P     | R     | mAP50 | mAP50-95 |
-|------------------------|--------|-----------|-------|-------|-------|----------|
-| all                    | 308    | 754       | 0.575 | 0.636 | 0.632 | 0.448    |
-| Angular Leafspot        | 43     | 52        | 0.84 | 0.731 | 0.782 | 0.529    |
-| Anthracnose Fruit Rot   | 13     | 20        | 0.455 | 0.15 | 0.215 | 0.0772    |
-| Blossom Blight          | 29     | 44        | 0.73 | 1 | 0.956 | 0.678    |
-| Gray Mold              | 77     | 108       | 0.63 | 0.583 | 0.596 | 0.353    |
-| Leaf Spot              | 71     | 257       | 0.65 | 0.798 | 0.798 | 0.664    |
-| Powdery Mildew Fruit    | 12     | 18        | 0.227 | 0.333 | 0.295 | 0.18    |
-| Powdery Mildew Leaf     | 63     | 255       | 0.492 | 0.859 | 0.783 | 0.652    |
-
-Speed: 0.2ms preprocess, 1.2ms inference, 0.0ms loss, 0.9ms postprocess per image
-
-### 4. Model-4 Fine-tuned for 50 epochs in original dataset => runs/detect/train4
-
-50 epochs completed in 0.365 hours.
-Model summary (fused): 186 layers, 2,685,733 parameters, 0 gradients, 6.8 GFLOPs
-
-| Class                  | Images | Instances | P     | R     | mAP50 | mAP50-95 |
-|------------------------|--------|-----------|-------|-------|-------|----------|
-| all                    | 308    | 754       | 0.764 |     0.836  |    0.847  |    0.618    |
-| Angular Leafspot        | 43     | 52        | 0.978 |      0.84  |    0.889  |    0.619    |
-| Anthracnose Fruit Rot   | 13     | 20        | 0.689 |       0.7  |   0.725   |  0.409    |
-| Blossom Blight          | 29     | 44        | 0.839 |         1  |  0.989    |   0.824    |
-| Gray Mold              | 77     | 108       | 0.794 |     0.704  |    0.797  |    0.491    |
-| Leaf Spot              | 71     | 257       | 0.732 |     0.868  |    0.896  |   0.772    |
-| Powdery Mildew Fruit    | 12     | 18        | 0.716 |      0.84  |     0.783 |     0.472    |
-| Powdery Mildew Leaf     | 63     | 255       | 0.598 |     0.898  |     0.852 |     0.737    |
-
-Speed: 0.2ms preprocess, 1.2ms inference, 0.0ms loss, 0.9ms postprocess per image
-
-# 5. Model-5 Fine-tuned for 75 epochs => runs/detect/train7
-Model fine-tuned for 75 epochs.
-Model summary (fused): 186 layers, 2,685,733 parameters, 0 gradients, 6.8 GFLOPs
-                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 5/5 [00:02<00:00,  1.98it/s]
-                   all        308        754      0.852      0.751      0.882      0.669
-      Angular Leafspot         43         52      0.935      0.828      0.912      0.632
- Anthracnose Fruit Rot         13         20      0.791        0.6      0.798      0.548
-        Blossom Blight         29         44      0.875          1      0.993      0.846
-             Gray Mold         77        108      0.947      0.657       0.86      0.546
-             Leaf Spot         71        257      0.906      0.826      0.931      0.816
-  Powdery Mildew Fruit         12         18      0.715      0.557      0.787      0.517
-   Powdery Mildew Leaf         63        255      0.794      0.792       0.89      0.778
-
-Speed: 0.2ms preprocess, 1.1ms inference, 0.0ms loss, 3.6ms postprocess per image
+## Acknowledgements
+- `YOLOv8` by Ultralytics
+- `FastAPI` for server implementation
+- `OpenCV` for image processing

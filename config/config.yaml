@@ -3,7 +3,7 @@ dataset_url: "https://universe.roboflow.com/ds/AGwYvP3noP?key=${STRAWBERRY_DISEA
 data_dir : "data"
 
 # Local path
-base_dir: "/home/aiot-garage/Strawberry_Health_AI"
+base_dir: "/Users/rabindramanandhar/Documents/GarageClub/Projects/Strawberry_Health_AI"
 
 # Class names
 class_names: ['Angular Leafspot', 'Anthracnose Fruit Rot', 'Blossom Blight', 'Gray Mold', 'Leaf Spot', 'Powdery Mildew Fruit', 'Powdery Mildew Leaf']
@@ -13,13 +13,15 @@ epochs: 2                # Number of training epochs
 batch_size: 32            # Batch size
 img_size: 640             # Input image size
 
-# Camera Image Frames
-saved_frames_dir: "saved_frames_dir"
-
-# Transformed Images
-input_images_dir: "images"
-transformed_images_dir: "transformed_images_dir"
-
 # Raspberry Pi server IP and port
 server_url: "http://192.168.50.67:8000"
+upload_dir: "uploaded_images"
 download_dir: "downloaded_images"
+
+# Camera Image Frames
+transormed_frames_dir: "transformed_frames"
+
+# Transformed Images
+transformed_images_dir: "transformed_images"
+
+
