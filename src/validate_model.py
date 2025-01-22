@@ -5,12 +5,12 @@ import pandas as pd
 import glob
 
 
-def validate_model(model_path, data_file):
+def validate_model(model_path, data_file, device):
     # Load the trained model (after fine-tuning)
     model = YOLO(model_path)
 
     # Validate the model on the validation set
-    metrics = model.val(data=data_file, save_json=True, device="mps")
+    metrics = model.val(data=data_file, save_json=True, device=device)
 
     print(metrics.box.map)  # map50-95
     print(metrics.box.map50)  # map50

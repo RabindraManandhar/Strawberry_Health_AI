@@ -13,10 +13,10 @@ from src.download_images_from_server import download_all_images
 from src.train_model import train_model
 from src.validate_model import validate_model
 
-from camera_image_capture_track_transform_classify import (
+from src.camera_image_capture_track_transform_classify import (
     camera_image_capture_transform_classify,
 )
-from server_image_transform_classify import server_image_transform_and_classify
+from src.server_image_transform_classify import server_image_transform_and_classify
 
 
 if __name__ == "__main__":
@@ -35,12 +35,6 @@ if __name__ == "__main__":
     transormed_frames_dir = config["transormed_frames_dir"]
     transformed_image_dir = config["transformed_images_dir"]
 
-    # Download dataset (if necessary)
-    download_and_extract_dataset(dataset_url, data_dir)
-
-    # Download images from server
-    download_all_images(server_url, download_dir)
-
     # Configure device
     if torch.cuda.is_available():
         device = "cuda"
@@ -48,17 +42,21 @@ if __name__ == "__main__":
         device = "mps"
     else:
         device = "cpu"
+    #print(device)
 
-    # print(device)
-
+    # Download dataset (if necessary)
+    download_and_extract_dataset(dataset_url, data_dir)
+    
     # Fine-tuning the preloaded model on roboflow dataset with Transfer learning
     train_model(data_file, batch_size, epochs, img_size, device)
+
 
     # Last model obtained from training
     model_path = "runs/detect/train/weights/last.pt"
 
     # Validate the trained model
-    validate_model(model_path, data_file)
+    validate_model(model_path, data_file, device)
+
 
     # Camera captured image transformation, object detection and classification
     camera_index = 0
@@ -75,3 +73,4 @@ if __name__ == "__main__":
         input_images_dir=download_dir,
         transformed_images_dir=transformed_image_dir,
     )
+

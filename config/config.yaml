@@ -3,13 +3,13 @@ dataset_url: "https://universe.roboflow.com/ds/AGwYvP3noP?key=${STRAWBERRY_DISEA
 data_dir : "data"
 
 # Local path
-base_dir: "/Users/rabindramanandhar/Documents/GarageClub/Projects/Strawberry_Health_AI"
+base_dir: "/home/aiot-garage/RabindraManandhar/Strawberry_Health_AI"
 
 # Class names
 class_names: ['Angular Leafspot', 'Anthracnose Fruit Rot', 'Blossom Blight', 'Gray Mold', 'Leaf Spot', 'Powdery Mildew Fruit', 'Powdery Mildew Leaf']
 
 # Training Hyperparameters
-epochs: 2                # Number of training epochs
+epochs: 100               # Number of training epochs
 batch_size: 32            # Batch size
 img_size: 640             # Input image size
 
