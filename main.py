@@ -8,7 +8,11 @@ sys.path.append(os.path.join(script_dir, "..", "src"))
 
 from src.utils import *
 from src.download_dataset import download_and_extract_dataset
-from src.download_images_from_server import download_all_images
+from src.download_images_from_server import (
+    download_all_images,
+    list_images,
+    download_image,
+)
 
 from src.train_model import train_model
 from src.validate_model import validate_model
@@ -42,27 +46,33 @@ if __name__ == "__main__":
         device = "mps"
     else:
         device = "cpu"
-    #print(device)
+    # print(device)
 
     # Download dataset (if necessary)
-    download_and_extract_dataset(dataset_url, data_dir)
-    
-    # Fine-tuning the preloaded model on roboflow dataset with Transfer learning
-    train_model(data_file, batch_size, epochs, img_size, device)
+    # download_and_extract_dataset(dataset_url, data_dir)
 
+    # Fine-tuning the preloaded model on roboflow dataset with Transfer learning
+    # train_model(data_file, batch_size, epochs, img_size, device)
 
     # Last model obtained from training
     model_path = "runs/detect/train/weights/last.pt"
 
     # Validate the trained model
-    validate_model(model_path, data_file, device)
+    # validate_model(model_path, data_file, device)
 
-
+    """
     # Camera captured image transformation, object detection and classification
     camera_index = 0
     camera_image_capture_transform_classify(
         model_path, camera_index, transormed_frames_dir
     )
+    """
+
+    # List all images
+    # list_images(server_url)
+
+    # Downloading one image
+    # download_image("jupiter.jpg", server_url, download_dir)
 
     # Downloading images stored in the server
     download_all_images(server_url, download_dir)
@@ -73,4 +83,3 @@ if __name__ == "__main__":
         input_images_dir=download_dir,
         transformed_images_dir=transformed_image_dir,
     )
-

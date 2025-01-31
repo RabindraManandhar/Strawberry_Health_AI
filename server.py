@@ -1,4 +1,4 @@
-from fastapi import FastAPI, File, UploadFile, HTTPException
+from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import FileResponse, StreamingResponse # FileResponse for single file, StreamResponse for zipfile
 from datetime import datetime
 import os
@@ -12,70 +12,105 @@ app = FastAPI()
 upload_dir =  "uploaded_images"
 os.makedirs(upload_dir, exist_ok=True)
 
-
-@app.post("/upload_image")
-async def upload_image(file: UploadFile = File(...)):
+@app.post("/upload")
+async def upload_image(request: Request):
     try:
-        # Generate a unique filename using the current timestamp
-        timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
-        filename = f"{timestamp}_{file.filename}"
+        # Read image data from the request
+        image_file = await request.body()
 
-        # Save the uploaded file
-        file_path = os.path.join(upload_dir, filename)
+        if not image_file:
+            raise HTTPException(status_code=400, detail="No image provided")
 
-        with open(file_path, "wb") as buffer:
-            buffer.write(await file.read())
+        # Generate a timestamped filename
+        timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+        filename = os.path.join(upload_dir, f"image_{timestamp}.jpg")
 
-        return {"filename": {filename}, "status": "Image received successfully!"}
+        # Save the image to the directory
+        with open(filename, "wb") as f:
+            f.write(image_file)
+
+        return {"message": "Image received", "filename": {filename}}
+
     except Exception as e:
-        return {"error": str(e)}
+        raise HTTPException(status_code=500, detail=str(e))
 
         
 @app.get("/list_images")
 def list_images():
-    files = os.listdir(upload_dir)
-    return {f"files: {files}"}
+    """Returns a list of all image filenames in the upload directory."""
+    try:
+        files = os.listdir(upload_dir)
 
+        # Filter only image files (JPG, PNG, etc.)
+        image_files = [file for file in files if file.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.bmp'))]
+
+        if not image_files:
+            return {"message": "No images found", "files": []}
+
+        return {"message": "Images retrieved successfully", "files": image_files}
+
+    except Exception as e:
+        print(f"Unexpected Server Error: {str(e)}")  # Log the error
+        raise HTTPException(status_code=500, detail="Internal Server Error")
+
+ 
 
 @app.get("/get_image/{filename}")
 def get_image(filename: str):
-    file_path = os.path.join(upload_dir, filename)
+    try:
+        file_path = os.path.join(upload_dir, filename)
 
-    if not os.path.isfile(file_path):
-        raise HTTPException(status_code=404, detail="Image not found!")
+        if not os.path.isfile(file_path):
+            print("Error: No images found")  # Log the error
+            raise HTTPException(status_code=404, detail="Image not found!")
+        
+        return FileResponse(file_path)
     
-    return FileResponse(file_path)
+    except HTTPException as http_err:
+        raise http_err  # Pass through known errors like 404
+
+    except Exception as e:
+        print(f"Unexpected Server Error: {str(e)}")  # Log unexpected errors
+        raise HTTPException(status_code=500, detail="Internal Server Error")
 
 
 @app.get("/get_all_images")
 def get_all_images():
-   try:
-        # Check if thre are any files in the uploaded images directory
+    try:
         files = os.listdir(upload_dir)
+
+        # If no images exist, return 404 **before attempting to create ZIP**
         if not files:
+            print("Error: No images found")  # Log the error
             raise HTTPException(status_code=404, detail="No images found")
 
-        # Create a BytesIO object to hold the zip data in memory
-        zip_buffer = BytesIO()    
-
-        # Create a zip file in memory
+        # Create an in-memory zip file
+        zip_buffer = BytesIO()
         with zipfile.ZipFile(zip_buffer, "w", zipfile.ZIP_DEFLATED) as zip_file:
-            # Add all files in the upload directory to the zip file
             for file in files:
                 file_path = os.path.join(upload_dir, file)
                 if os.path.isfile(file_path):
                     zip_file.write(file_path, file)
 
+        # If the ZIP file is still empty, return a 404
+        if zip_buffer.tell() == 0:
+            raise HTTPException(status_code=404, detail="No images found")
 
-        # Seek to the beginning of the BytesIO buffer
         zip_buffer.seek(0)
 
-        # Return the zip file as a response
         return StreamingResponse(
-            zip_buffer, media_type="application/x-zip-compressed", headers={"content-Disposition": "attachment; filename=images.zip"}
+            zip_buffer,
+            media_type="application/x-zip-compressed",
+            headers={"Content-Disposition": "attachment; filename=images.zip"}
         )
-   
-   except Exception as e:
-       # log the error for debugging
-       print(f"Error while zipping images: {str(e)}") 
-       raise HTTPException(status_code=500, detail="Internal Server Error")
+
+    except HTTPException as http_err:
+        raise http_err  # Pass through known errors like 404
+
+    except Exception as e:
+        print(f"Unexpected Server Error: {str(e)}")  # Log unexpected errors
+        raise HTTPException(status_code=500, detail="Internal Server Error")
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port = 8000, reload=True)

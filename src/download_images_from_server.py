@@ -8,22 +8,25 @@ def list_images(server_url):
     """Fetch the list of images from the Raspberry Pi server."""
     try:
         response = requests.get(f"{server_url}/list_images")
-        response.raise_for_status()  # Check if the request was successful
-        images = response.json()  # Get the list of images
 
-        # Print the list of images
-        if images:
-            print("Images available on the server:")
-            for image in images:
-                print(image)
+        # Print detailed response for debugging
+        # print(f"Response Status Code: {response.status_code}")
+        # print(f"Response Content: {response.text}")  # Print server response content
+
+        # Check if the request was successful
+        if response.status_code == 200:
+            data = response.json()
+            if data["files"]:
+                print("Images available on the server:")
+                for image in data["files"]:
+                    print(f" - {image}")
+            else:
+                print("No images found on the server.")
         else:
-            print(f"No images available on server: {server_url}")
-
-        return images
+            print(f"Error fetching image list: {response.status_code}")
 
     except requests.RequestException as e:
-        print(f"Error fetching image list: {e}")
-        return []
+        print(f"Error connecting to server: {e}")
 
 
 def download_image(filename, server_url, download_dir):
@@ -31,10 +34,21 @@ def download_image(filename, server_url, download_dir):
     # Make directory if it doesn't exist
     os.makedirs(download_dir, exist_ok=True)
 
-    """Download an image from the Raspberry Pi server."""
+    """Download an image from the server."""
     try:
         response = requests.get(f"{server_url}/get_image/{filename}", stream=True)
-        response.raise_for_status()  # Check if the request was successful
+
+        # Print detailed response for debugging
+        # print(f"Response Status Code: {response.status_code}")
+        # print(f"Response Content: {response.text}")  # Print server response content
+
+        # If the server responds with 404 (No images found), handle it gracefully
+        if response.status_code == 404:
+            print("No images found on the server.")
+            return
+
+        # Raise an error for other HTTP errors
+        response.raise_for_status()
 
         filepath = os.path.join(download_dir, filename)
         with open(filepath, "wb") as f:
@@ -56,7 +70,18 @@ def download_all_images(server_url, download_dir):
     try:
         # Request the zip file from the server
         response = requests.get(f"{server_url}/get_all_images", stream=True)
-        response.raise_for_status()  # Check if the request was successful
+
+        # Print detailed response for debugging
+        # print(f"Response Status Code: {response.status_code}")
+        # print(f"Response Content: {response.text}")  # Print server response content
+
+        # If the server responds with 404 (No images found), handle it gracefully
+        if response.status_code == 404:
+            print("No images found on the server.")
+            return
+
+        # Raise an error for other HTTP errors
+        response.raise_for_status()
 
         # Use BytesIO to store the zip file content in memory
         zip_file = BytesIO(response.content)

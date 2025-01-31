@@ -40,20 +40,28 @@ STRAWBERRY_HEALTH_AI/
 │   ├── data.yaml
 │   ├── README.dataset.txt
 │   ├── README.roboflow.txt
+├── downloaded_images/                                      # Automatically created where downloaded images from server are stored 
+├── runs/                                                   # Automatically created where model weights and metrics are stored
+│   ├── train/
+│   ├── val/
 ├── src/                                                    # Source code for the package
 │   ├── camera_image_capture_track_transform_classify.py
 │   ├── download_datasets.py
 │   ├── download_images_from_server.py            
 │   ├── server_image_transform_classify.py              
 │   ├── train_model.py
-│   ├── validate_model.py                
-├── venv/                      
-│   ├──
+│   ├── utils.py                
+│   ├── validate_model.py
+├── transformed_frames/                                     # Automatically created where transformed images from camera captured images are stored 
+├── transormed_images/                                      # Automatically created where transformed images from server downloaded images are stored 
+├── venv/                                                   # python virtual environment                      
+├── .env                                                    # environment variables
 ├── .gitignore                                              # Git ignored files
+├── classification_results.txt                              # Automatically created for saving strawberry disease classification result
 ├── main.py                                                 # Entry point for the project
 ├── README.md                                               # Detailed project description
 ├── requirements.txt                                        # Required Python dependencies
-├── server.py                                               # Server setup
+├── server.py                                               # server configuration using fastapi
 ```
 
 ## Installation
@@ -65,7 +73,7 @@ cd Strawberry_Health_AI
 
 ## Requirements
 The project requires the following dependencies:
-
+- python>=3.12.8
 - ultralytics>=8.0.0
 - torch>=2.4.1
 - torchaudio>=2.4.1
@@ -147,7 +155,7 @@ python server_iamge_transform_classify.py
 #### 8. Server Operations
 Start the server:
 ```bash
-uvicorn server:app --reload
+uvicorn server:app --host 0.0.0.0 --port 8000 --reload
 ```
 
 ## Configuration
@@ -170,12 +178,14 @@ Download a specific image from the server:
 - **Endpoint**: /get_image/{filename}
 
 #### 4. Download All Images
-Download all images as a ZIP file
+Download all images from the server as a ZIP file and extract them
 - **Method**: GET
 - **Endpoint**: /get_all_images
 
 
 ## Acknowledgements
-- `YOLOv8` by Ultralytics
+- `YOLOv8` by Ultralytics for model training, validation and inference
 - `FastAPI` for server implementation
 - `OpenCV` for image processing
+- `Espressif` for esp32-cam configuration
+- `ChatGPT` for troubleshooting
