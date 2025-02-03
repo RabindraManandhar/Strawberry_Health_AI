@@ -71,7 +71,7 @@ STRAWBERRY_HEALTH_AI/
 ## Installation
 Clone the repository:
 ```bash
-git clone https://github.com/RabindraManandhar/Strawberry_Health_AI
+git clone https://github.com/RabindraManandhar/Strawberry_Health_AI.git
 cd Strawberry_Health_AI
 ```
 
