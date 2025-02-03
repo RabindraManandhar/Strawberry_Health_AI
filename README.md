@@ -1,4 +1,8 @@
-̌# Strawberry Plant Health AI
+# Strawberry Plant Health AI
+
+A YOLOv8-based AI project for disease detection and classification.
+
+## Overview
 
 This project focuses on leveraging computer vision and YOLOv8 to detect and classify the health of strawberry plants. The workflow includes downloading open dataset, fine-tuning models, real-time classification of images using a camera as well as classification of images on a server.
 
@@ -185,7 +189,7 @@ Download all images from the server as a ZIP file and extract them
 
 ## Acknowledgements
 - `YOLOv8` by Ultralytics for model training, validation and inference
-- `FastAPI` for server implementation
+- `FastAPI` for server setup
 - `OpenCV` for image processing
 - `Espressif` for esp32-cam configuration
 - `ChatGPT` for troubleshooting

@@ -31,6 +31,9 @@ def load_config_with_env(config_file="config/config.yaml"):
     # Retrieve the dataset download key from environment variables
     key = os.getenv("STRAWBERRY_DISEASE_KEY")
 
+    # Retrieve server url from environment variables
+    config["server"]["url"] = os.getenv("SERVER_URL")
+
     # If the API key is not set, raise an error or handle it
     if key is None:
         raise ValueError(
@@ -41,7 +44,6 @@ def load_config_with_env(config_file="config/config.yaml"):
     config["dataset_url"] = config["dataset_url"].replace(
         "${STRAWBERRY_DISEASE_KEY}", key
     )
-
     return config
 
 

@@ -34,7 +34,7 @@ if __name__ == "__main__":
     epochs = config["epochs"]
     batch_size = config["batch_size"]
     img_size = config["img_size"]
-    server_url = config["server_url"]
+    server_url = config["server"]["url"]
     download_dir = config["download_dir"]
     transormed_frames_dir = config["transormed_frames_dir"]
     transformed_image_dir = config["transformed_images_dir"]
@@ -60,19 +60,25 @@ if __name__ == "__main__":
     # Validate the trained model
     # validate_model(model_path, data_file, device)
 
+    # Below are two ways to do image transformation, object detection and image clasification
+    # 1. Using web camera
+    # 2. Using images downloaded from server (images in the server are captured using esp32-cam with camera module and stored in the server via wireless connectivity)
+
     """
-    # Camera captured image transformation, object detection and classification
+    # 1. Camera captured image transformation, object detection and classification
     camera_index = 0
     camera_image_capture_transform_classify(
         model_path, camera_index, transormed_frames_dir
     )
+
     """
 
+    # 2. Using images downloaded from server
     # List all images
-    # list_images(server_url)
+    list_images(server_url)
 
     # Downloading one image
-    # download_image("jupiter.jpg", server_url, download_dir)
+    download_image("<image>.jpg", server_url, download_dir)
 
     # Downloading images stored in the server
     download_all_images(server_url, download_dir)
